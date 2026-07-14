@@ -21,3 +21,9 @@ outputs/
 
 # Environment variables
 .env
+
+# Exceptions to allow tracking of default demo videos
+!carPark[1].mp4
+!carPark[2].mp4
+!carPark[3].mp4
+!carPark[4].mp4
