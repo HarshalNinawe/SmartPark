@@ -1,80 +1,146 @@
 # SmartPark: Intelligent Parking Space Detection using Computer Vision 🚗
 
-SmartPark is a production-ready, cloud-deployable computer vision application built on Streamlit. It detects parking slot occupancy from video feeds using OpenCV and generates rule-based occupancy summary reports and parking health updates.
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://smartpark-nrvrwzydpfjsmdrbsyksud.streamlit.app/)
+[![Python Version](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Features
-
-- **Real-Time Bounding Box Overlays**: OpenCV pipeline processes video streams to draw green outlines for empty spots and red outlines for occupied spots.
-- **Verification Preview**: Renders the first frame of the uploaded video with the layout slots overlaid so users can verify alignment before running.
-- **Live Metrics Dashboard**: Real-time summary statistics tracking Total Slots, Occupied Slots, Free Slots, and Occupancy Rate.
-- **Local Analytics Reporting**: Calculates final session metrics (Average Occupancy Rate, Peak Occupancy Rate) and classifies the parking lot state.
-- **Parking Health Visual Indicator**: Provides intuitive status badges (🟢 Low, 🟡 Moderate, 🟠 High, 🔴 Nearly Full) with specific operational recommendations.
-- **CSV Data Exporter**: Download the detailed timeline history of parking occupancy rates.
-- **Zero Configuration Demo**: Automatically creates and loads a default demonstration layout (`sample_layout.pkl`) if no layout is uploaded.
+SmartPark is a production-ready, cloud-deployable computer vision application built on Streamlit. It monitors parking space utilization in real time from video feeds using OpenCV and provides an interactive web dashboard for monitoring occupancy statistics and exportable reports.
 
 ---
 
-## Project Structure
+## 🔗 Live Demo
+
+Experience the live deployed application on Streamlit Community Cloud:  
+👉 **[https://smartpark-nrvrwzydpfjsmdrbsyksud.streamlit.app/](https://smartpark-nrvrwzydpfjsmdrbsyksud.streamlit.app/)**
+
+---
+
+## ✨ Features
+
+- **Parking Space Occupancy Detection**: Leverages an OpenCV-based image processing pipeline to dynamically detect slot occupancy.
+- **Video Upload Support**: Processes uploaded parking lot video files (.mp4, .avi, .mov, etc.).
+- **Parking Layout (.pkl) Upload**: Allows importing custom coordinate bounding boxes.
+- **Layout Verification Preview**: Overlays slot bounds onto the first frame of the video to verify alignment before starting calculations.
+- **Real-Time Parking Metrics**: Displays total monitored spots, current occupied spots, and free spots.
+- **Occupancy Percentage Calculation**: Real-time statistics tracking utility rate.
+- **Parking Health Indicator**: Shows a colored badge system (🟢 Healthy, 🟡 Normal, 🟠 Alert, 🔴 Capacity warning) based on overall utilization.
+- **Rule-Based Parking Summary**: Generates rule-based summaries and management recommendations offline.
+- **CSV Export**: Downloads a complete timestamped log of the occupancy tracking history.
+- **Fully Offline Operation**: Performs all analytics and processing locally without relying on external cloud machine learning APIs.
+- **Streamlit Web Interface**: A clean, fully responsive, user-friendly modern dashboard.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Python**: Core programming language.
+- **Streamlit**: Web application framework.
+- **OpenCV**: Open-source computer vision library for image thresholding and processing.
+- **NumPy**: Matrix computations and mathematical operations.
+- **Pandas**: Structured statistical timeline data tracking and CSV exporting.
+- **Pillow**: Frontend image loading and format utilities.
+
+---
+
+## 📁 Project Structure
 
 ```
-SmartPark-AI/
-├── app.py              # Streamlit frontend layout and video processing loop
-├── detector.py         # OpenCV image processing and space-checking logic
-├── utils.py            # Layout loading and CSV generation helpers
-├── sample_layout.pkl   # Auto-generated grid of 12 slots for testing
-├── requirements.txt    # Minimal dependencies for cloud host compatibility
-├── .gitignore          # Excludes caches and uploaded media
-└── README.md           # This project guide
+SmartPark-AI/ (Workspace Root)
+├── app.py              # Main dashboard frontend and real-time processing loop
+├── detector.py         # OpenCV video thresholding and space annotations
+├── utils.py            # Bounding box coordinates loading and CSV utilities
+├── sample_layout.pkl   # Pre-configured grid of 12 spaces for demo purposes
+├── requirements.txt    # Production-ready package dependency declarations
+├── .gitignore          # Git exclusion guidelines
+└── README.md           # This document
 ```
 
 ---
 
-## Installation & Setup
+## 💻 Installation
 
 ### 1. Prerequisites
 Ensure you have **Python 3.11+** installed on your system.
 
 ### 2. Navigate to the Directory
-Open a terminal and navigate to the project directory:
+Navigate to the project workspace directory:
 ```bash
 cd SmartPark-AI
 ```
 
 ### 3. Install Dependencies
-Install all required libraries (using `opencv-python-headless` to ensure headless cloud server compatibility):
+Install all package requirements (uses `opencv-python-headless` for headless server compatibility):
 ```bash
 pip install -r requirements.txt
 ```
 
----
-
-## How to Run Locally
-
-Start the application by running:
+### 4. Run the Application
+Launch the local Streamlit development server:
 ```bash
 streamlit run app.py
 ```
-This will open the application in a new browser window (usually at `http://localhost:8501`).
+Open a browser and navigate to `http://localhost:8501`.
 
 ---
 
-## Usage Guide
+## 📖 Usage
 
-1. **Parking Layout File (.pkl)**: Upload a layout file containing space coordinates. If none is uploaded, the app automatically initializes a standard **12-slot demo grid**.
-2. **Parking Video**: Upload a security camera feed or parking lot video file (.mp4, .avi, etc.).
-3. **Layout Verification**: Once uploaded, review the **Verification Preview** on the screen to check if the boxes match the parking spaces. If they don't, adjust the layout or the camera position.
-4. **Processing**: Click **Start Processing**. Watch the CV pipeline run in real-time.
-5. **Analytics and Exports**:
-   - Download the generated **CSV Report** detailing timeline data.
-   - Read the local **Parking Summary & Health** report containing occupancy summaries and suggestions.
+1. **Upload Parking Layout**: Upload a `.pkl` layout configuration file in the sidebar. If none is uploaded, the dashboard initializes the pre-packaged **12-slot default grid** automatically.
+2. **Upload Parking Video**: Upload the security camera feed video file in the sidebar.
+3. **Verify Layout Preview**: Look at the **Verification Preview** box on the main panel to make sure the bounding boxes align correctly over the parking spaces.
+4. **Start Processing**: Click **Start Processing** in the sidebar. The video will play showing red boxes for occupied slots and green boxes for empty slots.
+5. **View Parking Metrics**: Monitor real-time counts, utilization rates, and the visual **Parking Health** panel.
+6. **Download CSV Report**: Once processing completes, click **Download CSV Report** in the lower left to download the statistics history.
 
 ---
 
-## Deployment to Streamlit Community Cloud
+## 🚀 Deployment
 
-This application is optimized for deployment directly to the **Streamlit Community Cloud** with zero modifications.
+This application is publicly deployed and hosted on **Streamlit Community Cloud** at the following address:  
+🔗 **[https://smartpark-nrvrwzydpfjsmdrbsyksud.streamlit.app/](https://smartpark-nrvrwzydpfjsmdrbsyksud.streamlit.app/)**
 
-1. Push this codebase to a public GitHub repository.
-2. Go to [share.streamlit.io](https://share.streamlit.io/) and log in with your GitHub account.
-3. Click **New App**, select your repository, branch, and set the main file path to `SmartPark-AI/app.py`.
-4. Click **Deploy** and the application is live!
+Deploying your own version:
+1. Push the codebase to a public GitHub repository.
+2. Link your GitHub account to [share.streamlit.io](https://share.streamlit.io/).
+3. Click **New App**, select your repository, and set the entry file to `SmartPark-AI/app.py`.
+4. Click **Deploy**!
+
+---
+
+## 🔮 Future Improvements
+
+- **Automatic Parking Slot Detection**: Incorporate deep learning (e.g. YOLO/R-CNN) to automatically detect slots without needing manually pre-drawn `.pkl` files.
+- **Multi-Camera Support**: Monitor multiple cameras simultaneously on a single unified dashboard.
+- **Historical Analytics**: Integrate database storage (SQLite/PostgreSQL) to store analytics history for monthly/weekly dashboard graphs.
+- **License Plate Recognition (ALPR)**: Identify specific vehicles entering and exiting each slot.
+- **Mobile-Friendly Interface**: Create a lightweight mobile progressive web app (PWA) version for parking lot operators on the go.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) details below.
+
+```
+MIT License
+
+Copyright (c) 2026 Harshal Ninawe
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
